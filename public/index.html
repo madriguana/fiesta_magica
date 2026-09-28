@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiesta Mágica</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+
+      <a href="#inicio" class="logo">
+        🎉 Fiesta<span>Mágica</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" type="button">
+        ☰
+      </button>
+
+      <nav id="navLinks">
+        <a href="#inicio">Inicio</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#conocenos">Conócenos</a>
+        <a href="#personalizar">Personalizar fiesta</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+
+        <div class="hero-text">
+          <span class="badge">✨ Cumpleaños infantiles</span>
+
+          <h1>
+            Creamos cumpleaños
+            <span>mágicos e inolvidables</span>
+          </h1>
+
+          <p>
+            Personaliza tu fiesta eligiendo la edad, la temática,
+            los servicios y paga de forma segura.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#personalizar" class="btn btn-primary">
+              Personalizar mi fiesta 🎨
+            </a>
+
+            <a href="#como-funciona" class="btn btn-secondary">
+              Cómo funciona 🚀
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-emoji">🎂</div>
+
+          <h2>Todo preparado para celebrar</h2>
+
+          <ul>
+            <li>✅ Animación y juegos</li>
+            <li>✅ Decoración temática</li>
+            <li>✅ Pinta-caras y globoflexia</li>
+            <li>✅ Magia y espectáculos</li>
+            <li>✅ Catering y tartas</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section white-section" id="como-funciona">
+      <div class="container">
+
+        <div class="section-title">
+          <span class="badge">Fácil y rápido</span>
+
+          <h2>¿Cómo funciona?</h2>
+
+          <p>
+            Personaliza tu fiesta en cinco sencillos pasos.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <article>
+            <div class="step-number">1</div>
+            <div class="step-icon">🎂</div>
+            <h3>Elige la edad</h3>
+            <p>Selecciona la edad del cumpleañero.</p>
+          </article>
+
+          <article>
+            <div class="step-number">2</div>
+            <div class="step-icon">🎭</div>
+            <h3>Escoge la temática</h3>
+            <p>Elige la temática que más le guste.</p>
+          </article>
+
+          <article>
+            <div class="step-number">3</div>
+            <div class="step-icon">🎪</div>
+            <h3>Añade servicios</h3>
+            <p>Selecciona los servicios que necesitas.</p>
+          </article>
+
+          <article>
+            <div class="step-number">4</div>
+            <div class="step-icon">💌</div>
+            <h3>Déjanos tus datos</h3>
+            <p>Rellena tus datos de contacto.</p>
+          </article>
+
+          <article>
+            <div class="step-number">5</div>
+            <div class="step-icon">💳</div>
+            <h3>Paga seguro</h3>
+            <p>Revisa el total y paga con Stripe.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section conocenos" id="conocenos">
+      <div class="container">
+
+        <div class="section-title">
+          <span class="badge">Nuestra filosofía</span>
+
+          <h2>Más que una fiesta, creamos recuerdos</h2>
+
+          <p>
+            Nos encargamos de cada detalle para que los niños se diviertan
+            y las familias puedan disfrutar.
+          </p>
+        </div>
+
+        <div class="about-grid">
+
+          <article class="about-card">
+            <div class="about-icon">💛</div>
+            <h3>Trato cercano</h3>
+            <p>
+              Escuchamos tus ideas y adaptamos la celebración a tu familia.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="about-icon">✨</div>
+            <h3>Todo preparado</h3>
+            <p>
+              Organizamos la decoración, los juegos y las actividades.
+            </p>
+          </article>
+
+          <article class="about-card">
+            <div class="about-icon">🛡️</div>
+            <h3>Diversión segura</h3>
+            <p>
+              Preparamos actividades adecuadas para cada edad.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PERSONALIZADOR -->
+    <section class="section configurator" id="personalizar">
+      <div class="container">
+
+        <div class="section-title">
+          <span class="badge">Configurador de fiesta</span>
+
+          <h2>Personaliza tu fiesta</h2>
+
+          <p>
+            Completa cada paso y descubre el precio de tu celebración.
+          </p>
+        </div>
+
+        <div class="wizard">
+
+          <!-- INDICADORES -->
+          <div class="progress">
+
+            <div class="progress-line">
+              <div id="progressFill"></div>
+            </div>
+
+            <div class="progress-step active" data-step="1">
+              <strong>1</strong>
+              <span>Edad</span>
+            </div>
+
+            <div class="progress-step" data-step="2">
+              <strong>2</strong>
+              <span>Temática</span>
+            </div>
+
+            <div class="progress-step" data-step="3">
+              <strong>3</strong>
+              <span>Servicios</span>
+            </div>
+
+            <div class="progress-step" data-step="4">
+              <strong>4</strong>
+              <span>Datos</span>
+            </div>
+
+            <div class="progress-step" data-step="5">
+              <strong>5</strong>
+              <span>Pago</span>
+            </div>
+
+          </div>
+
+          <form id="wizardForm">
+
+            <!-- PASO 1: EDAD -->
+            <div class="wizard-screen active" id="screen1">
+
+              <div class="screen-icon">🎂</div>
+
+              <h3>¿Qué edad cumple?</h3>
+
+              <p>
+                Selecciona la edad del niño o niña.
+              </p>
+
+              <label for="age">
+                Grupo de edad
+              </label>
+
+              <select id="age">
+                <option value="">-- Selecciona una edad --</option>
+                <option value="1-3 años">🎈 1-3 años</option>
+                <option value="4-5 años">🧸 4-5 años</option>
+                <option value="6-7 años">🎨 6-7 años</option>
+                <option value="8-9 años">🎮 8-9 años</option>
+                <option value="10-12 años">⚡ 10-12 años</option>
+                <option value="Más de 12 años">✨ Más de 12 años</option>
+              </select>
+
+              <p class="error" id="ageError">
+                Selecciona una edad para continuar.
+              </p>
+
+              <div class="wizard-buttons">
+                <span></span>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="next1"
+                >
+                  Siguiente →
+                </button>
+              </div>
+
+            </div>
+
+            <!-- PASO 2: TEMÁTICA -->
+            <div class="wizard-screen" id="screen2">
+
+              <div class="screen-icon">🎭</div>
+
+              <h3>¿Qué temática prefieres?</h3>
+
+              <p>
+                Elige la temática favorita para la fiesta.
+              </p>
+
+              <label for="theme">
+                Temática
+              </label>
+
+              <select id="theme">
+                <option value="">-- Selecciona una temática --</option>
+                <option value="Princesas">👑 Princesas</option>
+                <option value="Dinosaurios">🦖 Dinosaurios</option>
+                <option value="Unicornios">🦄 Unicornios</option>
+                <option value="Superhéroes">🦸 Superhéroes</option>
+                <option value="Robots">🤖 Robots</option>
+                <option value="Espacio">🚀 Espacio</option>
+                <option value="Animales">🦁 Animales</option>
+              </select>
+
+              <p class="error" id="themeError">
+                Selecciona una temática para continuar.
+              </p>
+
+              <div class="wizard-buttons">
+                <button
+                  type="button"
+                  class="btn btn-back"
+                  id="back2"
+                >
+                  ← Anterior
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="next2"
+                >
+                  Siguiente →
+                </button>
+              </div>
+
+            </div>
+
+            <!-- PASO 3: SERVICIOS -->
+            <div class="wizard-screen" id="screen3">
+
+              <div class="screen-icon">🎪</div>
+
+              <h3>Elige los servicios</h3>
+
+              <p>
+                Marca los servicios que quieres añadir a tu fiesta.
+              </p>
+
+              <div class="services-list">
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="animacion"
+                    data-nombre="Animación y juegos"
+                    data-price="120"
+                  >
+
+                  <span>🤹</span>
+
+                  <div>
+                    <strong>Animación y juegos</strong>
+                    <small>120 €</small>
+                  </div>
+                </label>
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="decoracion"
+                    data-nombre="Decoración temática"
+                    data-price="80"
+                  >
+
+                  <span>🎈</span>
+
+                  <div>
+                    <strong>Decoración temática</strong>
+                    <small>80 €</small>
+                  </div>
+                </label>
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="pintacaras"
+                    data-nombre="Pinta-caras y globoflexia"
+                    data-price="60"
+                  >
+
+                  <span>🎨</span>
+
+                  <div>
+                    <strong>Pinta-caras y globoflexia</strong>
+                    <small>60 €</small>
+                  </div>
+                </label>
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="magia"
+                    data-nombre="Magia y espectáculos"
+                    data-price="100"
+                  >
+
+                  <span>🪄</span>
+
+                  <div>
+                    <strong>Magia y espectáculos</strong>
+                    <small>100 €</small>
+                  </div>
+                </label>
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="catering"
+                    data-nombre="Catering y tarta"
+                    data-price="90"
+                  >
+
+                  <span>🍰</span>
+
+                  <div>
+                    <strong>Catering y tarta</strong>
+                    <small>90 €</small>
+                  </div>
+                </label>
+
+                <label class="service">
+                  <input
+                    type="checkbox"
+                    name="service"
+                    value="hinchable"
+                    data-nombre="Castillo hinchable"
+                    data-price="150"
+                  >
+
+                  <span>🏰</span>
+
+                  <div>
+                    <strong>Castillo hinchable</strong>
+                    <small>150 €</small>
+                  </div>
+                </label>
+
+              </div>
+
+              <div class="price-box">
+                Total actual:
+                <strong id="liveTotal">0 €</strong>
+              </div>
+
+              <p class="error" id="servicesError">
+                Selecciona al menos un servicio.
+              </p>
+
+              <div class="wizard-buttons">
+                <button
+                  type="button"
+                  class="btn btn-back"
+                  id="back3"
+                >
+                  ← Anterior
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="next3"
+                >
+                  Siguiente →
+                </button>
+              </div>
+
+            </div>
+
+            <!-- PASO 4: DATOS -->
+            <div class="wizard-screen" id="screen4">
+
+              <div class="screen-icon">💌</div>
+
+              <h3>Déjanos tus datos</h3>
+
+              <p>
+                Necesitamos estos datos para preparar tu solicitud.
+              </p>
+
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="name">Nombre</label>
+
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Tu nombre"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Teléfono</label>
+
+                  <input
+                    type="tel"
+                    id="phone"
+                    placeholder="600 000 000"
+                  >
+                </div>
+
+                <div class="form-group full">
+                  <label for="email">
+                    Correo electrónico
+                  </label>
+
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="tu@email.com"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="date">
+                    Fecha de la fiesta
+                  </label>
+
+                  <input type="date" id="date">
+                </div>
+
+                <div class="form-group">
+                  <label for="location">
+                    Lugar de la fiesta
+                  </label>
+
+                  <input
+                    type="text"
+                    id="location"
+                    placeholder="Local, domicilio o parque"
+                  >
+                </div>
+
+                <div class="form-group full">
+                  <label for="notes">
+                    Información adicional
+                  </label>
+
+                  <textarea
+                    id="notes"
+                    placeholder="Cuéntanos cómo quieres la fiesta..."
+                  ></textarea>
+                </div>
+
+              </div>
+
+              <p class="error" id="dataError">
+                Completa tu nombre, teléfono y correo.
+              </p>
+
+              <div class="wizard-buttons">
+                <button
+                  type="button"
+                  class="btn btn-back"
+                  id="back4"
+                >
+                  ← Anterior
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="next4"
+                >
+                  Siguiente →
+                </button>
+              </div>
+
+            </div>
+
+            <!-- PASO 5: PAGO -->
+            <div class="wizard-screen" id="screen5">
+
+              <div class="screen-icon">💳</div>
+
+              <h3>Revisa y paga</h3>
+
+              <p>
+                Comprueba tu reserva. El pago se hace en la página segura de Stripe.
+              </p>
+
+              <div class="summary">
+
+                <h4>Resumen de la reserva</h4>
+
+                <p>
+                  <strong>Edad:</strong>
+                  <span id="summaryAge">Sin seleccionar</span>
+                </p>
+
+                <p>
+                  <strong>Temática:</strong>
+                  <span id="summaryTheme">Sin seleccionar</span>
+                </p>
+
+                <p>
+                  <strong>Servicios:</strong>
+                  <span id="summaryServices">Sin seleccionar</span>
+                </p>
+
+                <p>
+                  <strong>A nombre de:</strong>
+                  <span id="summaryName">-</span>
+                </p>
+
+                <p>
+                  <strong>Fecha:</strong>
+                  <span id="summaryDate">Sin indicar</span>
+                </p>
+
+                <p class="total-row">
+                  <strong>Total:</strong>
+                  <span id="summaryTotal">0 €</span>
+                </p>
+
+              </div>
+
+              <p class="pay-note">
+                🔒 Aceptamos tarjeta y los demás métodos que ofrece Stripe.
+                No guardamos los datos de tu tarjeta.
+              </p>
+
+              <p class="notice" id="cancelNotice">
+                Has cancelado el pago y no se ha cobrado nada. Puedes intentarlo otra vez.
+              </p>
+
+              <p class="error" id="paymentError">
+                No se ha podido iniciar el pago.
+              </p>
+
+              <div class="wizard-buttons">
+                <button
+                  type="button"
+                  class="btn btn-back"
+                  id="back5"
+                >
+                  ← Anterior
+                </button>
+
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  id="payButton"
+                >
+                  Pagar con Stripe 💳
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+
+          <!-- CONFIRMACIÓN -->
+          <div class="success-message" id="successMessage">
+
+            <div class="screen-icon" id="successIcon">🎉</div>
+
+            <h3 id="successTitle">¡Pago completado!</h3>
+
+            <p id="successText">
+              Hemos recibido tu reserva. Te escribiremos para confirmar los detalles.
+            </p>
+
+            <p id="successTotalRow">
+              Total pagado:
+              <strong id="finalTotal"></strong>
+            </p>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="restart"
+            >
+              Preparar otra fiesta
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="section white-section" id="servicios">
+      <div class="container">
+
+        <div class="section-title">
+          <span class="badge">Nuestros servicios</span>
+
+          <h2>Todo lo que necesitas</h2>
+
+          <p>
+            Puedes añadir los servicios que quieras desde el configurador.
+          </p>
+        </div>
+
+        <div class="catalog-grid">
+
+          <article class="catalog-card">
+            <div>🤹</div>
+            <h3>Animación</h3>
+            <p>120 €</p>
+          </article>
+
+          <article class="catalog-card">
+            <div>🎈</div>
+            <h3>Decoración</h3>
+            <p>80 €</p>
+          </article>
+
+          <article class="catalog-card">
+            <div>🎨</div>
+            <h3>Pinta-caras</h3>
+            <p>60 €</p>
+          </article>
+
+          <article class="catalog-card">
+            <div>🪄</div>
+            <h3>Espectáculos</h3>
+            <p>100 €</p>
+          </article>
+
+          <article class="catalog-card">
+            <div>🍰</div>
+            <h3>Catering</h3>
+            <p>90 €</p>
+          </article>
+
+          <article class="catalog-card">
+            <div>🏰</div>
+            <h3>Hinchables</h3>
+            <p>150 €</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section contact-section" id="contacto">
+      <div class="container">
+
+        <div class="section-title">
+          <span class="badge">Estamos para ayudarte</span>
+
+          <h2>¿Tienes alguna duda?</h2>
+
+          <p>
+            Escríbenos y te ayudaremos a preparar una fiesta inolvidable.
+          </p>
+        </div>
+
+        <div class="contact-info">
+          <a href="tel:+34600000000">
+            📞 600 000 000
+          </a>
+
+          <a href="mailto:tuemail@ejemplo.com">
+            ✉️ tuemail@ejemplo.com
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      © 2026 Fiesta Mágica. Cumpleaños infantiles llenos de ilusión.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
