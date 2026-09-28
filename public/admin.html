@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Pedidos · Fiesta Mágica</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    .admin { padding: 50px 0 80px; }
+    .admin h1 {
+      color: var(--morado-oscuro);
+      font-family: "Fredoka", sans-serif;
+      font-size: 2.2rem;
+    }
+    .login {
+      max-width: 420px;
+      margin: 60px auto;
+      padding: 32px;
+      border-radius: 24px;
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+    }
+    .login h1 { margin-bottom: 6px; text-align: center; }
+    .login p { margin-bottom: 20px; color: var(--texto-suave); text-align: center; }
+    .login .btn { width: 100%; margin-top: 14px; }
+    .panel-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stats { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; }
+    .stat {
+      padding: 16px 22px;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      background: var(--blanco);
+    }
+    .stat small { display: block; color: var(--texto-suave); font-weight: 700; }
+    .stat strong { color: var(--morado); font-family: "Fredoka", sans-serif; font-size: 1.6rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      background: var(--blanco);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--borde);
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    td.wrap { min-width: 220px; white-space: normal; }
+    th { background: var(--morado-claro); color: var(--morado-oscuro); font-weight: 800; }
+    tr:last-child td { border-bottom: 0; }
+    td.total { color: var(--rosa-oscuro); font-weight: 800; }
+    .empty { padding: 40px; color: var(--texto-suave); text-align: center; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">🎉 Fiesta<span>Mágica</span></a>
+      <a href="/" class="btn btn-back">Volver a la web</a>
+    </div>
+  </header>
+
+  <main class="container admin">
+
+    <!-- LOGIN -->
+    <form class="login" id="loginForm">
+      <h1>Panel de pedidos</h1>
+      <p>Solo para el personal de Fiesta Mágica.</p>
+      <label for="password"><strong>Contraseña</strong></label>
+      <input type="password" id="password" autocomplete="current-password" required>
+      <p class="error" id="loginError"></p>
+      <button type="submit" class="btn btn-primary" id="loginButton">Entrar</button>
+    </form>
+
+    <!-- PANEL -->
+    <section id="panel" class="hidden">
+      <div class="panel-top">
+        <h1>Pedidos pagados</h1>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="reload">Actualizar</button>
+          <button type="button" class="btn btn-success" id="excel">Descargar Excel</button>
+          <button type="button" class="btn btn-back" id="logout">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><small>Pedidos</small><strong id="statCount">0</strong></div>
+        <div class="stat"><small>Total cobrado</small><strong id="statTotal">0 €</strong></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha pago</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Fecha fiesta</th>
+              <th>Lugar</th>
+              <th>Edad</th>
+              <th>Temática</th>
+              <th>Servicios</th>
+              <th>Total</th>
+              <th>Notas</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <p class="empty hidden" id="empty">Todavía no hay pedidos pagados.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    let pedidos = [];
+    let password = "";
+
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const loginButton = document.getElementById("loginButton");
+    const panel = document.getElementById("panel");
+
+    function formatoFecha(iso) {
+      return new Date(iso).toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" });
+    }
+
+    function euros(n) {
+      return n.toLocaleString("es-ES", { minimumFractionDigits: 2 }) + " €";
+    }
+
+    async function cargar() {
+      const r = await fetch("/api/pedidos", {
+        method: "POST",
+        headers: { "x-admin-password": password }
+      });
+      const datos = await r.json();
+      if (!r.ok) throw new Error(datos.error || "Error al cargar");
+      pedidos = datos.pedidos;
+      pintar();
+    }
+
+    // Se usa textContent (no innerHTML) para que nadie pueda meter
+    // código malicioso escribiéndolo en las notas del pedido (XSS).
+    function pintar() {
+      const tbody = document.getElementById("tbody");
+      tbody.replaceChildren();
+
+      pedidos.forEach(function (p) {
+        const fila = document.createElement("tr");
+        const celdas = [
+          [formatoFecha(p.fecha_pago)], [p.nombre], [p.email], [p.telefono],
+          [p.fecha_fiesta], [p.lugar], [p.edad], [p.tematica],
+          [p.servicios, "wrap"], [euros(p.total), "total"], [p.notas, "wrap"]
+        ];
+        celdas.forEach(function (c) {
+          const td = document.createElement("td");
+          td.textContent = c[0] || "-";
+          if (c[1]) td.className = c[1];
+          fila.appendChild(td);
+        });
+        tbody.appendChild(fila);
+      });
+
+      const total = pedidos.reduce(function (s, p) { return s + p.total; }, 0);
+      document.getElementById("statCount").textContent = pedidos.length;
+      document.getElementById("statTotal").textContent = euros(total);
+      document.getElementById("empty").classList.toggle("hidden", pedidos.length > 0);
+    }
+
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      password = document.getElementById("password").value;
+      loginButton.disabled = true;
+      loginButton.textContent = "Comprobando…";
+      loginError.classList.remove("show");
+
+      try {
+        await cargar();
+        sessionStorage.setItem("adminPassword", password);
+        loginForm.classList.add("hidden");
+        panel.classList.remove("hidden");
+      } catch (err) {
+        loginError.textContent = err.message;
+        loginError.classList.add("show");
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "Entrar";
+      }
+    });
+
+    document.getElementById("reload").addEventListener("click", async function () {
+      this.disabled = true;
+      try { await cargar(); } catch (err) { alert(err.message); }
+      this.disabled = false;
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+      sessionStorage.removeItem("adminPassword");
+      password = "";
+      pedidos = [];
+      document.getElementById("password").value = "";
+      panel.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    });
+
+    document.getElementById("excel").addEventListener("click", function () {
+      const filas = pedidos.map(function (p) {
+        return {
+          "Fecha pago": formatoFecha(p.fecha_pago),
+          "Nombre": p.nombre,
+          "Email": p.email,
+          "Teléfono": p.telefono,
+          "Fecha fiesta": p.fecha_fiesta,
+          "Lugar": p.lugar,
+          "Edad": p.edad,
+          "Temática": p.tematica,
+          "Servicios": p.servicios,
+          "Total (€)": p.total,
+          "Notas": p.notas
+        };
+      });
+      const hoja = XLSX.utils.json_to_sheet(filas);
+      hoja["!cols"] = [18, 22, 28, 14, 13, 22, 14, 13, 50, 10, 40].map(function (w) { return { wch: w }; });
+      const libro = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(libro, hoja, "Pedidos");
+      XLSX.writeFile(libro, "pedidos-fiesta-magica.xlsx");
+    });
+
+    // Si ya habías entrado en esta pestaña, entra solo
+    (async function () {
+      const guardada = sessionStorage.getItem("adminPassword");
+      if (!guardada) return;
+      password = guardada;
+      try {
+        await cargar();
+        loginForm.classList.add("hidden");
+        panel.classList.remove("hidden");
+      } catch (e) {
+        sessionStorage.removeItem("adminPassword");
+      }
+    })();
+  </script>
+
+</body>
+</html>
