@@ -60,7 +60,7 @@ exports.handler = async function (event) {
 
   const seleccion = ids.map((id) => SERVICIOS[id]);
   const listaServicios = seleccion.map((s) => s.nombre).join(", ");
-  const web = process.env.URL || "https://" + event.headers.host;
+   const web = "https://" + event.headers.host;
 
   // Todo esto queda guardado en Stripe y sale al exportar los pagos a Excel
   const datosPedido = {
